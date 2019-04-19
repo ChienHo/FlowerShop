@@ -24,6 +24,7 @@ namespace FA.FlowerShop.Core
         public string ImageUrl { get; set; }
 
         public decimal Price { get; set; }
+        public decimal SalePrice { get; set; }
 
         public Color Color { get; set; }
 
@@ -36,6 +37,6 @@ namespace FA.FlowerShop.Core
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

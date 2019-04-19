@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Sale Off";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="sale-off">
+    <form action="@Url.Action("SaleOff", "Manage", new {Area = "Admin"})" method="post">
+        <div class="form-group">
+            <label for="CategoryId">Select Category:</label>
+            @Html.DropDownList("CategoryId", new SelectList(ViewBag.Categories, "Value", "Text"), "Select a category", new { @class = "form-control", @id = "category-list" })
+        </div>
+        <div class="form-group">
+            <label for="FlowerId">Select Flower:</label>
+            <select class="custom-select" id="flower-list" name="FlowerId">
+                <option>Select a flower</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="SaleOff">Sale Off:</label>
+            <input type="number" name="SaleOff" class="form-control" placeholder="Input sale off">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="return ">Sale Off</button>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+            $("#category-list").change(function () {
+                var selectedCategory = $(this).val();
+                $.ajax({
+                    url: "/Admin/Manage/GetFlowersByCategory",
+                    type: "post",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        'CategoryId': selectedCategory,
+                        'ca$libri': 'no$libri'
+                    }),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (result) {
+                        $('#flower-list').find('option').not(':first').remove().end();
+                        result.forEach((item) => {
+                            $('#flower-list').append(new Option(item.flowerName, item.flowerId, false, false));
+                        });
+                    },
+                    error: (errormessage) => {
+                        alert(errormessage.responseText);
+                    }
+                });
+            });
+    </script>
+}

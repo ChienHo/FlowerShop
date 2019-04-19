@@ -1,0 +1,16 @@
+﻿@using System.Globalization
+@model FA.FlowerShop.Core.Flower
+
+<div class="col-md-3 text-center mb-3">
+    <div class="card" style="width: 17rem;">
+        <img src="~/Content/Img/@Model.ImageUrl" class="card-img-top" alt="@Model.FlowerName">
+        <div class="card-body">
+            <a class="card-title" href="@Url.Action("Details", "Flower", new {id=Model.FlowerId})">@Model.FlowerName</a>
+            <p class="card-text">@Model.Price.ToString("C0", CultureInfo.CreateSpecificCulture("en-US"))</p>
+            <a href="#" class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>
+</div>
+
+
+

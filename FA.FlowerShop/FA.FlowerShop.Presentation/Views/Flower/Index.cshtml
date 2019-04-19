@@ -1,0 +1,13 @@
+﻿@using System.Globalization
+@model IEnumerable<FA.FlowerShop.Core.Flower>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@foreach (var item in Model)
+{
+    @Html.Partial("_FlowerViewPartial", item);
+}
+
+

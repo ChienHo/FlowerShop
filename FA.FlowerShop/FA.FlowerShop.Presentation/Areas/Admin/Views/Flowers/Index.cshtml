@@ -1,0 +1,91 @@
+﻿@model IEnumerable<FA.FlowerShop.Core.Flower>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Flower manage</h2>
+
+<p>
+    <a href="@Url.Action("Create")"><button class="btn btn-success"><i class="fa fa-plus">Add new</i></button></a>
+</p>
+<div class="table-responsive">
+    <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FlowerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageUrl)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreInventory)
+                </th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FlowerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <img src="~/Content/Img/@item.ImageUrl" alt="@item.FlowerName" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreInventory)
+                    </td>
+                    <td>
+                        <form action="@Url.Action("Delete", "Flowers", new {id = item.FlowerId})">
+
+                            <a href="@Url.Action("Edit", "Flowers", new {id = item.FlowerId})" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="@Url.Action("Details", new {id = item.FlowerId})" class="btn btn-info">
+                                <i class="fa fa-info-circle"></i>
+                            </a>
+                            <button type="submit" onclick="return confirm('Are you sure to delete this post?');" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
