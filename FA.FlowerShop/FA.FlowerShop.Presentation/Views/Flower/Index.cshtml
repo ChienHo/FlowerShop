@@ -5,6 +5,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<form class="form-inline mt-5 mb-5" action="/" method="post">
+    @Html.DropDownList("Category", new SelectList(ViewBag.Category, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control"})
+    <input class="form-control mr-sm-2" type="search" name="flowerName" placeholder="name" aria-label="Search">
+    <input class="form-control mr-sm-2" type="number" name="price1" required="" placeholder="price 1">
+    <input class="form-control mr-sm-2" type="number" name="price2" required="" placeholder="price 2">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
 @foreach (var item in Model)
 {
     @Html.Partial("_FlowerViewPartial", item);
